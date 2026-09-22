@@ -1,7 +1,7 @@
 # Engineering in the AI Era — A Management Perspective
 
 An interactive, web-based talk deck for **SWE Growth Chapter DIY**, 26 September 2026.
-Speaker: **Arif H Rezaldy**. 45 minutes, 26 slides.
+Speaker: **Arif H Rezaldy**. 45 minutes, 27 slides.
 
 The deck navigates like Google Slides or PowerPoint, runs in the browser, and every slide
 has real motion and something to interact with. Eight slides carry a live 3D scene.
@@ -18,7 +18,7 @@ has real motion and something to interact with. Eight slides carry a live 3D sce
 | Node.js | 20.9+ (built and tested on 22.x) |
 | pnpm | 10+ (built on 12.4.2) |
 | Browser | A recent Chrome, Edge, Safari or Firefox with WebGL2 |
-| Display | **Desktop only.** No layout below 1024px wide. Comfortable at 1366×850 and up; slide 23 is the densest and its code panes scroll below that |
+| Display | **Desktop only.** No layout below 1024px wide. Comfortable at 1366×850 and up; slide 24 is the densest and its code panes scroll below that |
 
 Don't have pnpm? `npm install -g pnpm` (or `corepack enable`, though corepack does not yet
 understand pnpm 12's binary layout — the npm install is the reliable route).
@@ -54,9 +54,9 @@ dev-time double-rendering and is noticeably smoother on an older laptop.
 | `F` | Toggle fullscreen |
 | `Esc` | Exit fullscreen → close the shortcuts sheet → toggle the slide overview |
 | `?` | Keyboard shortcuts sheet |
-| `Shift` + `1`–`3` | Switch demo station (slide 25 only) |
-| `←` / `→` on slide 20 | Step Junior → Mid → Senior before moving on |
-| `1`–`8` on slide 24 | Jump between recap nodes while the pointer is over the graph |
+| `Shift` + `1`–`3` | Switch demo station (slide 26 only) |
+| `←` / `→` on slide 21 | Step Junior → Mid → Senior before moving on |
+| `1`–`8` on slide 25 | Jump between recap nodes while the pointer is over the graph |
 
 Mouse: edge chevrons, the progress bar (click anywhere on it to seek), chapter ticks on the
 progress bar, and the slide counter (bottom right) opens the overview grid.
@@ -70,17 +70,19 @@ in sync as you navigate, so you can bookmark or share a position.
 
 - **Slide 2** is the speaker intro. Hover or click a role on the timeline to bring it
   forward; the contact chips are live links.
-- **Slide 4** has a live Yes/No tally — click it while the room raises hands.
-- **Slide 19** walks the chain automatically when you arrive, then hands over: click any
+- **Slide 4** frames the talk: why a management view, your vantage point, and the
+  grain-of-salt caveat. Worth saying the caveat out loud rather than leaving it on screen.
+- **Slide 5** has a live Yes/No tally — click it while the room raises hands.
+- **Slide 20** walks the chain automatically when you arrive, then hands over: click any
   node or stepper pill to jump, *step* to advance, *replay* to run it again. The side
   panels light up as their step is reached.
-- **Slide 20** will not advance past Senior until you have stepped through all three levels;
+- **Slide 21** will not advance past Senior until you have stepped through all three levels;
   the `Execute → Solve → Identify & Multiply` line fills in as you go.
-- **Slide 22** is a checklist. Ticking items in front of the room is the point.
-- **Slide 23** steps both engineers forward together — press *advance both* repeatedly.
-- **Slide 24** plays the argument back automatically on arrival; *play argument* replays it.
-- **Slide 25** is the demo. Three stations, one canvas. Reset per station is top right.
-- **Slide 26** carries the discussion questions as clickable prompts, so you can run Q&A
+- **Slide 23** is a checklist. Ticking items in front of the room is the point.
+- **Slide 24** steps both engineers forward together — press *advance both* repeatedly.
+- **Slide 25** plays the argument back automatically on arrival; *play argument* replays it.
+- **Slide 26** is the demo. Three stations, one canvas. Reset per station is top right.
+- **Slide 27** carries the discussion questions as clickable prompts, so you can run Q&A
   without leaving the slide.
 
 ---
@@ -113,7 +115,7 @@ src/
     three/              ThreeCanvas (dynamic, ssr:false), CanvasInner, SceneKit
     slides/
       index.ts          the slide registry — order, titles, 3D flags, transitions
-      S01Intro.tsx … S26Speaker.tsx
+      S01Intro.tsx … S27Goals.tsx
       scenes/           R3F scenes used by individual slides
       scenes/stations/  the four demo-console stations
 ```
@@ -263,7 +265,7 @@ Colors live as CSS custom properties on `:root` and `.dark` in
 Change a token once and both 2D and 3D follow, because `usePalette()` mirrors the same
 values.
 
-The palette carries meaning and the audience learns it on slide 4 — keep it:
+The palette carries meaning and the audience learns it on slide 5 — keep it:
 
 | Token | Means |
 |---|---|
@@ -338,13 +340,14 @@ directives are a request, not a control.
 
 Every claim on the talk's slides traces to
 `docs/Engineering_in_the_AI_Era_A_Management_Perspective_30-45min.md`, the speaker's own
-source document. The one exception is the speaker intro (slide 2) and the contact details
-on the closing slide, which come from <https://ahrezaldy.com/>; both sources are recorded
-in `docs/SOURCE-NOTES.md`. [`docs/SOURCE-NOTES.md`](docs/SOURCE-NOTES.md) is that document broken
+source document. The exceptions: the speaker intro (slide 2) and the closing slide's contact details come
+from <https://ahrezaldy.com/>, and the framing on slide 4 — the talk's goal, the years
+working with upper management, and the caveat — was supplied directly by the speaker. All
+sources are recorded in `docs/SOURCE-NOTES.md`. [`docs/SOURCE-NOTES.md`](docs/SOURCE-NOTES.md) is that document broken
 into numbered notes by theme; [`docs/PLAN.md`](docs/PLAN.md) cites those note IDs per slide.
 
 Nothing was invented. Where the source is explicitly hypothetical — the "100 → 500 lines per
-day" figure on slide 14 — the slide labels it as such. No company metrics, benchmarks or AI
+day" figure on slide 15 — the slide labels it as such. No company metrics, benchmarks or AI
 vendors are named anywhere, because the source names none.
 
 If you add a slide, add its source note first.

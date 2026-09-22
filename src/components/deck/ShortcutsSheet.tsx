@@ -12,8 +12,8 @@ const KEYS: [string, string][] = [
   ["F", "Fullscreen"],
   ["Esc", "Exit fullscreen, else slide overview"],
   ["?", "This sheet"],
-  ["Shift + 1–3", "Demo station (slide 25)"],
-  ["← →  on slide 20", "Step seniority level"],
+  ["Shift + 1–3", "Demo station (slide 26)"],
+  ["← →  on slide 21", "Step seniority level"],
 ];
 
 export function ShortcutsSheet() {

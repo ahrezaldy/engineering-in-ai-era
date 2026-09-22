@@ -3,6 +3,7 @@ import type { TransitionKind } from "@/lib/transitions";
 
 import { S01Intro } from "./S01Intro";
 import { S26Speaker } from "./S26Speaker";
+import { S27Goals } from "./S27Goals";
 import { S02Overview } from "./S02Overview";
 import { S03Question } from "./S03Question";
 import { S04Before } from "./S04Before";
@@ -33,7 +34,7 @@ export type SlideProps = { slideIndex: number };
 export type SlideDef = {
   id: string;
   title: string;
-  kind: "intro" | "speaker" | "overview" | "content" | "recap" | "demo" | "qa";
+  kind: "intro" | "speaker" | "overview" | "framing" | "content" | "recap" | "demo" | "qa";
   Component: ComponentType<SlideProps>;
   has3d?: boolean;
   transition?: TransitionKind;
@@ -44,6 +45,7 @@ export const SLIDES: SlideDef[] = [
   // Push, not dolly: S01 exits on a dolly and dolly-into-dolly is a blurry scale-mush.
   { id: "speaker", title: "Arif H. Rezaldy", kind: "speaker", Component: S26Speaker },
   { id: "overview", title: "Where we're going", kind: "overview", Component: S02Overview },
+  { id: "goals", title: "Why this talk", kind: "framing", Component: S27Goals },
 
   // 01 · The change
   { id: "question", title: "The uncomfortable question", kind: "content", Component: S03Question, transition: "dolly" },
