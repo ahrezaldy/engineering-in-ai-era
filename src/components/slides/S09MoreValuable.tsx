@@ -38,7 +38,7 @@ export function S09MoreValuable() {
           axis="y"
           values={items}
           onReorder={setItems}
-          className="mt-12 max-w-2xl space-y-2"
+          className="mt-12 max-w-4xl space-y-2"
         >
           {items.map((label, i) => (
             <Reorder.Item
@@ -66,8 +66,10 @@ export function S09MoreValuable() {
                   size={15}
                   className="shrink-0 text-faint opacity-0 transition-opacity group-hover:opacity-100"
                 />
-                <div className="relative">
-                  <span className="text-[30px] font-medium tracking-tight">{label}</span>
+                <div className="relative shrink-0">
+                  <span className="text-[30px] font-medium tracking-tight whitespace-nowrap">
+                    {label}
+                  </span>
                   <motion.span
                     className="absolute -bottom-0.5 left-0 block h-px w-full origin-left bg-accent"
                     initial={{ scaleX: 0 }}
@@ -82,7 +84,7 @@ export function S09MoreValuable() {
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.22 }}
-                      className="ml-4 max-w-sm text-[13px] leading-snug text-muted"
+                      className="ml-4 min-w-0 text-[13px] leading-snug text-muted"
                     >
                       {GLOSS[label]}
                     </motion.span>

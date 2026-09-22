@@ -2,7 +2,9 @@
 
 import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
-import { RoundedBox, Text } from "@react-three/drei";
+import { Html, RoundedBox, Text } from "@react-three/drei";
+import { motion } from "motion/react";
+import { EASE_OUT } from "@/lib/motion";
 import * as THREE from "three";
 import { usePalette } from "@/components/three/SceneKit";
 import { useReducedMotionSafe } from "@/lib/use-reduced-motion-safe";
@@ -87,30 +89,46 @@ export function OutputOutcome({ speed, judgment }: { speed: number; judgment: nu
       />
       <Column x={2} height={outcomeH} color={accent} emissive={dark ? 0.6 : 0.16} tipping={0} />
 
+      {/* Upright and in front of each column. Painted flat on the floor, the camera saw
+          them at a grazing angle and the glyphs foreshortened and smeared. */}
       <Text
-        position={[-2, GROUND_Y + 0.02, 1.7]}
-        rotation={[-Math.PI / 2, 0, 0]}
-        fontSize={0.26}
+        position={[-2, GROUND_Y + 0.2, 2.7]}
+        fontSize={0.3}
         color={warn}
         anchorX="center"
+        anchorY="middle"
+        outlineWidth={0.02}
+        outlineColor={dark ? "#0a0a0b" : "#fafaf9"}
       >
         Volume
       </Text>
       <Text
-        position={[2, GROUND_Y + 0.02, 1.7]}
-        rotation={[-Math.PI / 2, 0, 0]}
-        fontSize={0.26}
+        position={[2, GROUND_Y + 0.2, 2.7]}
+        fontSize={0.3}
         color={accent}
         anchorX="center"
+        anchorY="middle"
+        outlineWidth={0.02}
+        outlineColor={dark ? "#0a0a0b" : "#fafaf9"}
       >
         Outcome
       </Text>
 
-      {/* Says out loud what the fall means, so the scene is not a mystery. */}
+      {/* Says out loud what the fall means, so the scene is not a mystery. Real DOM via
+          Html rather than 3D text: it stays sharp at any camera angle and can wear the
+          same glass card as the recap panel. `zIndexRange` keeps it under the deck
+          chrome and the overview grid, which Html's default range would sit above. */}
       {unstable ? (
-        <Text position={[-2, 0.2, 1.9]} fontSize={0.2} color={warn} anchorX="center" maxWidth={3.4} textAlign="center">
-          too tall for the judgment under it
-        </Text>
+        <Html position={[-2, 0.35, 1.9]} center zIndexRange={[20, 0]} style={{ pointerEvents: "none" }}>
+          <motion.div
+            initial={{ opacity: 0, y: 8, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.45, ease: EASE_OUT }}
+            className="glass rounded-xl px-5 py-2.5 text-[16px] font-medium whitespace-nowrap text-warn shadow-[var(--shadow)]"
+          >
+            too tall for the judgment under it
+          </motion.div>
+        </Html>
       ) : null}
 
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, GROUND_Y - 0.01, 0]}>

@@ -148,6 +148,7 @@ export function S23Recap({ slideIndex }: SlideProps) {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.32, ease: EASE_OUT }}
+              className="glass rounded-2xl p-7 shadow-[var(--shadow)]"
             >
               <div className="deck-kicker mb-3">
                 Step {String(active + 1).padStart(2, "0")} of {SPINE.length}
@@ -156,19 +157,20 @@ export function S23Recap({ slideIndex }: SlideProps) {
                 text={SPINE[active].full}
                 as="p"
                 by="word"
-                className="text-[30px] leading-snug font-medium tracking-tight text-balance"
+                className="text-[27px] leading-snug font-medium tracking-tight text-balance"
               />
             </motion.div>
           ) : revealed >= SPINE.length ? (
             <motion.div
               key="done"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.5, ease: EASE_OUT }}
+              className="glass rounded-2xl p-7 shadow-[var(--shadow)]"
             >
               <div className="deck-kicker mb-3">The whole talk in one line</div>
-              <p className="text-[28px] leading-snug font-medium tracking-tight text-balance">
+              <p className="text-[25px] leading-snug font-medium tracking-tight text-balance">
                 AI makes implementation cheaper, so the value of engineers shifts toward problem
                 selection, judgment, ownership, leverage and business impact.
               </p>

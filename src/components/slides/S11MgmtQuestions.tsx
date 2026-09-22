@@ -85,16 +85,31 @@ export function S11MgmtQuestions() {
           })}
         </div>
 
-        <div className="flex items-center gap-10">
+        <div className="relative flex items-center gap-10">
+          <AnimatePresence>
+            {noteOn ? (
+              <motion.p
+                initial={{ opacity: 0, y: 4 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.25 }}
+                className="pointer-events-none absolute -top-8 left-0 text-[13px] leading-snug whitespace-nowrap text-muted"
+              >
+                Engineers don&rsquo;t need to think like executives. Understanding the management
+                view just explains <em>why</em> the expectations are moving.
+              </motion.p>
+            ) : null}
+          </AnimatePresence>
+
           {/* Capacity → Leverage → Impact */}
-          <div className="flex items-center gap-3">
+          <div className="flex shrink-0 items-center gap-3">
             {SHIFT.map((stage, i) => (
               <div key={stage} className="flex items-center gap-3">
                 <motion.span
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, ease: EASE_OUT, delay: 1.3 + i * 0.18 }}
-                  className={`rounded-lg border px-4 py-2 font-mono text-[12px] ${
+                  className={`rounded-lg border px-4 py-2 font-mono text-[12px] whitespace-nowrap ${
                     i === SHIFT.length - 1
                       ? "border-accent bg-accent/10 text-accent"
                       : "border-line bg-surface text-muted"
@@ -118,21 +133,6 @@ export function S11MgmtQuestions() {
               </div>
             ))}
           </div>
-
-          <AnimatePresence>
-            {noteOn ? (
-              <motion.p
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.25 }}
-                className="max-w-md text-[13px] leading-snug text-muted"
-              >
-                Engineers don&rsquo;t need to think like executives. Understanding the management
-                view just explains <em>why</em> the expectations are moving.
-              </motion.p>
-            ) : null}
-          </AnimatePresence>
 
           <motion.p
             className="ml-auto max-w-xs text-right text-[14px] font-medium text-balance"
