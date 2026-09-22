@@ -1,0 +1,133 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --bg: #fafaf9;
+  --surface: #ffffff;
+  --surface-2: #f4f4f5;
+  --fg: #18181b;
+  --muted: #71717a;
+  --faint: #a1a1aa;
+  --accent: #4f46e5;
+  --accent-soft: #eef2ff;
+  --warn: #b45309;
+  --warn-soft: #fef3c7;
+  --line: #e4e4e7;
+  --shadow: 0 1px 2px rgb(24 24 27 / 0.04), 0 8px 24px -8px rgb(24 24 27 / 0.12);
+  --glow: 0 0 0 1px rgb(79 70 229 / 0.12), 0 12px 48px -12px rgb(79 70 229 / 0.35);
+  color-scheme: light;
+}
+
+.dark {
+  --bg: #0a0a0b;
+  --surface: #141417;
+  --surface-2: #1c1c21;
+  --fg: #fafafa;
+  --muted: #a1a1aa;
+  --faint: #71717a;
+  --accent: #818cf8;
+  --accent-soft: #1e1b4b;
+  --warn: #f59e0b;
+  --warn-soft: #3a2a09;
+  --line: #27272a;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px -8px rgb(0 0 0 / 0.6);
+  --glow: 0 0 0 1px rgb(129 140 248 / 0.2), 0 12px 48px -12px rgb(129 140 248 / 0.45);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-line: var(--line);
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quint: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  transition:
+    background-color 420ms var(--ease-out-expo),
+    color 420ms var(--ease-out-expo);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* Utility layer -------------------------------------------------------- */
+
+.deck-kicker {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.deck-title {
+  font-size: clamp(2.5rem, 4.1vw, 4rem);
+  line-height: 1.04;
+  letter-spacing: -0.033em;
+  font-weight: 600;
+}
+
+.deck-display {
+  font-size: clamp(3rem, 5.6vw, 5.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+  font-weight: 600;
+}
+
+.deck-body {
+  font-size: 1.1875rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.hairline {
+  border-color: var(--line);
+}
+
+.glass {
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
+  backdrop-filter: blur(16px) saturate(1.4);
+  border: 1px solid var(--line);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+}
