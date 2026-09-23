@@ -1,10 +1,10 @@
 # Engineering in the AI Era — A Management Perspective
 
 An interactive, web-based talk deck for **SWE Growth Chapter DIY**, 26 September 2026.
-Speaker: **Arif H Rezaldy**. 45 minutes, 27 slides.
+Speaker: **Arif H Rezaldy**. 45 minutes, 25 slides.
 
 The deck navigates like Google Slides or PowerPoint, runs in the browser, and every slide
-has real motion and something to interact with. Eight slides carry a live 3D scene.
+has real motion and something to interact with. Six slides carry a live 3D scene.
 
 > This is a private, internal talk deck. It is configured **not** to be crawled or indexed
 > (see [Privacy](#privacy)). Do not publish it to a public host.
@@ -18,7 +18,7 @@ has real motion and something to interact with. Eight slides carry a live 3D sce
 | Node.js | 20.9+ (built and tested on 22.x) |
 | pnpm | 10+ (built on 12.4.2) |
 | Browser | A recent Chrome, Edge, Safari or Firefox with WebGL2 |
-| Display | **Desktop only.** No layout below 1024px wide. Comfortable at 1366×850 and up; slide 24 is the densest and its code panes scroll below that |
+| Display | **Desktop only.** No layout below 1024px wide. Comfortable at 1366×850 and up; slide 23 is the densest and its code panes scroll below that |
 
 Don't have pnpm? `npm install -g pnpm` (or `corepack enable`, though corepack does not yet
 understand pnpm 12's binary layout — the npm install is the reliable route).
@@ -54,9 +54,8 @@ dev-time double-rendering and is noticeably smoother on an older laptop.
 | `F` | Toggle fullscreen |
 | `Esc` | Exit fullscreen → close the shortcuts sheet → toggle the slide overview |
 | `?` | Keyboard shortcuts sheet |
-| `Shift` + `1`–`3` | Switch demo station (slide 26 only) |
 | `←` / `→` on slide 21 | Step Junior → Mid → Senior before moving on |
-| `1`–`8` on slide 25 | Jump between recap nodes while the pointer is over the graph |
+| `1`–`8` on slide 24 | Jump between recap nodes while the pointer is over the graph |
 
 Mouse: edge chevrons, the progress bar (click anywhere on it to seek), chapter ticks on the
 progress bar, and the slide counter (bottom right) opens the overview grid.
@@ -78,11 +77,9 @@ in sync as you navigate, so you can bookmark or share a position.
   panels light up as their step is reached.
 - **Slide 21** will not advance past Senior until you have stepped through all three levels;
   the `Execute → Solve → Identify & Multiply` line fills in as you go.
-- **Slide 23** is a checklist. Ticking items in front of the room is the point.
-- **Slide 24** steps both engineers forward together — press *advance both* repeatedly.
-- **Slide 25** plays the argument back automatically on arrival; *play argument* replays it.
-- **Slide 26** is the demo. Three stations, one canvas. Reset per station is top right.
-- **Slide 27** carries the discussion questions as clickable prompts, so you can run Q&A
+- **Slide 23** steps both engineers forward together — press *advance both* repeatedly.
+- **Slide 24** plays the argument back automatically on arrival; *play argument* replays it.
+- **Slide 25** carries the discussion questions as clickable prompts, so you can run Q&A
   without leaving the slide.
 
 ---
@@ -117,8 +114,7 @@ src/
       index.ts          the slide registry — order, titles, 3D flags, transitions
       S01Intro.tsx … S27Goals.tsx
       scenes/           R3F scenes used by individual slides
-      scenes/stations/  the four demo-console stations
-```
+  ```
 
 ### The slide registry
 
@@ -129,7 +125,7 @@ truth for slide order. Each entry is:
 {
   id: "value-stack",              // stable key, used by AnimatePresence
   title: "The new engineering value stack",
-  kind: "content",                // intro | overview | content | recap | demo | qa
+  kind: "content",                // intro | speaker | overview | framing | content | recap | qa
   Component: S12ValueStack,
   has3d: true,                    // shows a "3D" badge in the overview grid
   transition: "dolly",            // "push" (default) or "dolly" for hero slides
@@ -158,7 +154,7 @@ taking `{ slideIndex }: SlideProps`, wrap it in `<SlideShell>`, then add it to t
 where you want it.
 
 The `Sxx` number is a unique file id, **not** a deck position — the registry reorders
-slides freely, so `S14CLevel` runs at position 12 and `S26Speaker` at position 2. Use the
+slides freely, so `S14CLevel` runs at position 14 and `S26Speaker` at position 2. Use the
 next free number and let the registry decide the order.
 
 `SlideShell` gives every slide the same gutters and an animated kicker/title block:
@@ -170,7 +166,7 @@ next free number and let the registry decide the order.
 ```
 
 Pass `bleed` instead for a full-canvas slide (used by the intro, the statement slides, the
-recap, the demo and Q&A).
+recap and Q&A).
 
 **Keep the interactivity bar.** Every slide in this deck has entrance choreography, a
 pointer-reactive element, and something to click, drag or step through. If you add a slide,
@@ -299,9 +295,8 @@ Targets 60fps on a 2019-era laptop.
   usually one.
 - Shiki is bundled fine-grained — three grammars and two themes instead of the full set.
   That alone took the static chunks from about 15 MB to 2.4 MB.
-- Physics is hand-integrated (the toppling column on demo station 1, the falling debris on
-  station 2). `@react-three/rapier` was evaluated and dropped: for two effects this simple
-  it was not worth the WASM payload.
+- `@react-three/rapier` was evaluated and dropped: nothing left in the deck needs a physics
+  engine, and it was not worth the WASM payload.
 
 If a scene feels heavy on the presenting machine, the first levers are the instance counts
 at the top of the scene file (`COLS`/`ROWS` in `LatticeField`, `count` on `Particles`, `SEG`

@@ -12,7 +12,6 @@ const KEYS: [string, string][] = [
   ["F", "Fullscreen"],
   ["Esc", "Exit fullscreen, else slide overview"],
   ["?", "This sheet"],
-  ["Shift + 1–3", "Demo station (slide 26)"],
   ["← →  on slide 21", "Step seniority level"],
 ];
 

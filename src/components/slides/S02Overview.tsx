@@ -31,7 +31,7 @@ const SUMMARIES: Record<string, { line: string; preview: string }> = {
     preview: "AI can generate the solution. The engineer owns the decision.",
   },
   action: {
-    line: "What to start, what to stop, and what to do with the capacity we get back.",
+    line: "How seniority changes, what the same ticket looks like now, and what to do with the capacity we get back.",
     preview: "Execute → Solve → Identify & Multiply",
   },
 };

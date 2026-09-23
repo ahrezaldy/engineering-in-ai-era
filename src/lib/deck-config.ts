@@ -16,7 +16,7 @@ export const CHAPTERS = [
   { id: "management", index: "03", label: "The management lens", start: 13, end: 14 },
   { id: "value", index: "04", label: "Output vs outcome", start: 15, end: 16 },
   { id: "engineer", index: "05", label: "What good looks like now", start: 17, end: 20 },
-  { id: "action", index: "06", label: "What we do about it", start: 21, end: 27 },
+  { id: "action", index: "06", label: "What we do about it", start: 21, end: 25 },
 ] as const;
 
 export type ChapterId = (typeof CHAPTERS)[number]["id"];

@@ -23,10 +23,8 @@ import { S17Measure } from "./S17Measure";
 import { S18SkillShift } from "./S18SkillShift";
 import { S19Seniority } from "./S19Seniority";
 import { S20SeniorMeans } from "./S20SeniorMeans";
-import { S21StartStop } from "./S21StartStop";
 import { S22SameTicket } from "./S22SameTicket";
 import { S23Recap } from "./S23Recap";
-import { S24Demo } from "./S24Demo";
 import { S25QA } from "./S25QA";
 
 export type SlideProps = { slideIndex: number };
@@ -34,7 +32,7 @@ export type SlideProps = { slideIndex: number };
 export type SlideDef = {
   id: string;
   title: string;
-  kind: "intro" | "speaker" | "overview" | "framing" | "content" | "recap" | "demo" | "qa";
+  kind: "intro" | "speaker" | "overview" | "framing" | "content" | "recap" | "qa";
   Component: ComponentType<SlideProps>;
   has3d?: boolean;
   transition?: TransitionKind;
@@ -76,10 +74,8 @@ export const SLIDES: SlideDef[] = [
   // 06 · What we do about it
   { id: "seniority", title: "Junior to Mid to Senior", kind: "content", Component: S19Seniority, has3d: true },
   { id: "senior-means", title: "What senior means now", kind: "content", Component: S20SeniorMeans },
-  { id: "start-stop", title: "Start / Stop", kind: "content", Component: S21StartStop },
   { id: "same-ticket", title: "Same ticket, different engineer", kind: "content", Component: S22SameTicket },
 
   { id: "recap", title: "The spine of the argument", kind: "recap", Component: S23Recap, has3d: true, transition: "dolly" },
-  { id: "demo", title: "The AI Era Console", kind: "demo", Component: S24Demo, has3d: true, transition: "dolly" },
   { id: "qa", title: "Over to you", kind: "qa", Component: S25QA, has3d: true, transition: "dolly" },
 ];
