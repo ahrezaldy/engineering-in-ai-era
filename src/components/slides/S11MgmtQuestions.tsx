@@ -21,7 +21,9 @@ const AFTER = [
 const SHIFT = ["Engineering Capacity", "Engineering Leverage", "Business Impact"];
 
 export function S11MgmtQuestions() {
-  const [side, setSide] = useState<"before" | "after">("after");
+  // Opens on "Before AI" so the speaker sets up the old questions first, then moves
+  // the emphasis to the AI-era column by hovering it.
+  const [side, setSide] = useState<"before" | "after">("before");
   const [noteOn, setNoteOn] = useState(false);
 
   return (
@@ -48,7 +50,8 @@ export function S11MgmtQuestions() {
                 }`}
               >
                 <div
-                  className={`deck-kicker mb-5 ${col.tone === "warn" ? "text-warn" : "text-accent"}`}
+                  style={{ color: col.tone === "warn" ? "var(--warn)" : "var(--accent)" }}
+                  className="deck-kicker mb-5"
                 >
                   {col.label}
                 </div>

@@ -37,7 +37,9 @@ const LENSES = [
 
 export function S14CLevel() {
   const [open, setOpen] = useState<string | null>(null);
-  const [reading, setReading] = useState<"fewer" | "more">("more");
+  // Starts on the reading the room already has, so the speaker can name it before
+  // switching to the other one. The box heading follows the selection.
+  const [reading, setReading] = useState<"fewer" | "more">("fewer");
 
   return (
     <SlideShell kicker="03 · The management lens" title="What C-level actually asks">
@@ -110,7 +112,19 @@ export function S14CLevel() {
 
           {/* The distinction the source is explicit about. */}
           <div className="w-[420px] rounded-xl border border-line bg-surface p-5">
-            <div className="deck-kicker mb-3">This does not have to mean</div>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={reading}
+                initial={{ opacity: 0, y: 5 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -5 }}
+                transition={{ duration: 0.22 }}
+                style={{ color: reading === "fewer" ? "var(--warn)" : "var(--accent)" }}
+                className="deck-kicker mb-3"
+              >
+                {reading === "fewer" ? "This does not have to mean" : "But it could also mean"}
+              </motion.div>
+            </AnimatePresence>
             <div className="flex gap-2">
               {(
                 [
@@ -138,20 +152,24 @@ export function S14CLevel() {
                 </button>
               ))}
             </div>
-            <AnimatePresence mode="wait">
-              <motion.p
-                key={reading}
-                initial={{ opacity: 0, y: 6 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -4 }}
-                transition={{ duration: 0.25 }}
-                className="mt-3 text-[13px] leading-snug text-muted"
-              >
-                {reading === "fewer"
-                  ? "One reading — and the one everyone jumps to first."
-                  : "The other reading. Extra capacity can go to reliability, tech debt, automation, experiments, developer experience, internal platforms, or new product bets."}
-              </motion.p>
-            </AnimatePresence>
+            {/* Reserved height: the two captions are one and three lines, and letting the
+                box resize nudges the whole centred column when the reading is switched. */}
+            <div className="mt-3 min-h-[56px]">
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={reading}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -4 }}
+                  transition={{ duration: 0.25 }}
+                  className="text-[13px] leading-snug text-muted"
+                >
+                  {reading === "fewer"
+                    ? "One reading — and the one everyone jumps to first."
+                    : "The other reading. Extra capacity can go to reliability, tech debt, automation, experiments, developer experience, internal platforms, or new product bets."}
+                </motion.p>
+              </AnimatePresence>
+            </div>
           </div>
         </div>
       </div>
