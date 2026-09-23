@@ -8,7 +8,12 @@ import { EASE_OUT, SPRING } from "@/lib/motion";
 import { useReducedMotionSafe } from "@/lib/use-reduced-motion-safe";
 
 const TRACK = 560;
+const BOX = 36; // the runner is h-9 w-9, and `x` moves its left edge
+// Targets are centred on where a runner's centre lands at x = TRACK, so the aimed lane
+// finishes dead on the bullseye instead of half a box past it.
+const TARGET_X = TRACK + BOX / 2;
 const OFFSET_PER_X = 34; // how far off-target the fast runner drifts per extra multiplier
+const RUN = 2.6; // both lanes run for the same clock time, whatever the speed multiplier
 
 export function S10WrongThing() {
   const reduced = useReducedMotionSafe();
@@ -19,7 +24,13 @@ export function S10WrongThing() {
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const miss = Math.round((speed - 1) * OFFSET_PER_X);
-  const durationA = reduced ? 0.01 : 2.6 / speed;
+  const duration = reduced ? 0.01 : RUN;
+  // Speed is shown as ground covered per second, not as an earlier finish: both lanes run
+  // for `RUN`, and the multiplier only front-loads the fast lane's easing, so it covers the
+  // track early and then drifts past the target while the aimed lane is still closing.
+  // One tween rather than keyframes — a keyframe junction lands at zero velocity and reads
+  // as a stumble just short of the target. At 1× this is exactly EASE_OUT, like the other lane.
+  const fastEase = [EASE_OUT[0] / speed, EASE_OUT[1], EASE_OUT[2], EASE_OUT[3]] as const;
   const runId = run.id;
   const done = run.done;
 
@@ -32,12 +43,12 @@ export function S10WrongThing() {
     if (timer.current) clearTimeout(timer.current);
     timer.current = setTimeout(
       () => setRun((r) => (r.id === runId ? { ...r, done: true } : r)),
-      (durationA + 0.25) * 1000,
+      (duration + 0.25) * 1000,
     );
     return () => {
       if (timer.current) clearTimeout(timer.current);
     };
-  }, [runId, durationA]);
+  }, [runId, duration]);
 
   return (
     <SlideShell
@@ -59,19 +70,19 @@ export function S10WrongThing() {
               <Target
                 size={22}
                 strokeWidth={1.75}
-                className="absolute top-1/2 -translate-y-1/2 text-accent"
-                style={{ left: TRACK }}
+                className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 text-accent"
+                style={{ left: TARGET_X }}
               />
               <motion.div
                 key={`a-${runId}-${speed}`}
                 className="absolute top-1/2 h-9 w-9 -translate-y-1/2 rounded-lg border-2 border-warn bg-warn/20"
                 initial={{ x: 0, y: "-50%" }}
                 animate={{ x: TRACK + miss, y: "-50%" }}
-                transition={{ duration: durationA, ease: EASE_OUT }}
+                transition={{ duration, ease: fastEase }}
               />
               <motion.div
                 className="absolute top-1/2 h-14 border-l border-dashed border-warn/60"
-                style={{ left: TRACK }}
+                style={{ left: TARGET_X }}
                 animate={{ opacity: done && miss > 4 ? 1 : 0, width: miss }}
                 transition={{ duration: 0.3 }}
               />
@@ -91,15 +102,15 @@ export function S10WrongThing() {
               <Target
                 size={22}
                 strokeWidth={1.75}
-                className="absolute top-1/2 -translate-y-1/2 text-accent"
-                style={{ left: TRACK }}
+                className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 text-accent"
+                style={{ left: TARGET_X }}
               />
               <motion.div
                 key={`b-${runId}`}
                 className="absolute top-1/2 h-9 w-9 -translate-y-1/2 rounded-lg border-2 border-accent bg-accent/20"
                 initial={{ x: 0, y: "-50%" }}
                 animate={{ x: TRACK, y: "-50%" }}
-                transition={{ duration: reduced ? 0.01 : 2.6, ease: EASE_OUT }}
+                transition={{ duration, ease: EASE_OUT }}
               />
             </div>
           </div>

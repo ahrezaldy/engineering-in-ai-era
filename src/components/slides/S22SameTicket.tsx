@@ -37,8 +37,10 @@ const CONSEQUENCES: { at: number; label: string }[] = [
   { at: 10, label: "Future consumers unconsidered" },
 ];
 
-/** Height is reserved whether or not any badges are showing, so nothing jumps. */
-const CONSEQUENCE_STRIP = "mt-2 mb-2 flex h-[46px] flex-wrap content-start gap-1.5 overflow-hidden";
+/** Height is reserved whether or not any badges are showing, so nothing jumps. Sized for
+ *  the two rows all five badges wrap into at 1366px and up — measured at 54px, so a shorter
+ *  strip clips the second row. */
+const CONSEQUENCE_STRIP = "mt-1.5 mb-1.5 flex h-[54px] flex-wrap content-start gap-1.5 overflow-hidden";
 
 const CODE_A = `// generated, merged, done
 app.get("/rooms/available", async (req, res) => {
@@ -65,25 +67,26 @@ export function S22SameTicket() {
     <SlideShell
       kicker="06 · What we do about it"
       title="Same ticket, different engineer"
-      className="pt-12 pb-16"
+      className="pt-12! pb-16! [&>header]:mb-5"
     >
-      <div className="flex h-full flex-col gap-3">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ ...SPRING, delay: 0.15 }}
-          className="mx-auto flex w-fit items-center gap-3 rounded-xl border border-line bg-surface px-5 py-3"
-        >
-          <Ticket size={16} className="text-accent" />
-          <span className="font-mono text-[14px]">
-            &ldquo;Add an API to return available rooms.&rdquo;
-          </span>
-        </motion.div>
-
-        {/* Controls sit directly under the ticket rather than at the foot of the slide:
-            at shorter viewports the code blocks used to crowd them, and the primary
-            button turns into reset at the end instead of going dead. */}
+      <div className="flex h-full flex-col gap-2.5">
+        {/* Ticket, controls and counter share one row, and the controls sit up here rather
+            than at the foot of the slide: every row above the lanes is height taken from
+            the code panes, which have to be readable without scrolling. The primary button
+            turns into reset at the end instead of going dead. */}
         <div className="flex shrink-0 flex-wrap items-center justify-center gap-x-5 gap-y-2">
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ ...SPRING, delay: 0.15 }}
+            className="flex items-center gap-3 rounded-xl border border-line bg-surface px-5 py-2.5"
+          >
+            <Ticket size={16} className="text-accent" />
+            <span className="font-mono text-[14px]">
+              &ldquo;Add an API to return available rooms.&rdquo;
+            </span>
+          </motion.div>
+
           <motion.button
             onClick={() => (done ? setStep(0) : setStep((s) => Math.min(s + 1, maxStep)))}
             whileTap={{ scale: 0.96 }}
@@ -125,8 +128,8 @@ export function S22SameTicket() {
             the headers, step lists, consequence strips and code blocks line up by
             construction, however many badges lane A has collected. */}
         <div className="grid min-h-0 flex-1 grid-cols-2 grid-rows-[auto_auto_auto_minmax(0,1fr)] gap-x-8">
-          <div className="deck-kicker mb-3 text-warn">Approach A · implementation focused</div>
-          <div className="deck-kicker mb-3 text-accent">Approach B · engineering focused</div>
+          <div className="deck-kicker mb-2 text-warn">Approach A · implementation focused</div>
+          <div className="deck-kicker mb-2 text-accent">Approach B · engineering focused</div>
 
           <ol className="space-y-0.5">
             {A.map((s, i) => (

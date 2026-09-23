@@ -16,7 +16,7 @@ const LENSES = [
     distinction: "Impact is the unit. Headcount is only one way of buying it.",
   },
   {
-    role: "CPO",
+    role: "COO",
     Icon: Rocket,
     question: "How quickly can we build, learn, and iterate?",
     distinction: "Faster learning loops matter more than faster typing.",
