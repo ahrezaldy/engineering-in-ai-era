@@ -1,7 +1,7 @@
 # Engineering in the AI Era — A Management Perspective
 
 An interactive, web-based talk deck for **SWE Growth Chapter DIY**, 26 September 2026.
-Speaker: **Arif H Rezaldy**. 45 minutes, 25 slides.
+Speaker: **Arif H. Rezaldy**. 45 minutes, 25 slides.
 
 The deck navigates like Google Slides or PowerPoint, runs in the browser, and every slide
 has real motion and something to interact with. Six slides carry a live 3D scene.
@@ -18,7 +18,7 @@ has real motion and something to interact with. Six slides carry a live 3D scene
 | Node.js | 20.9+ (built and tested on 22.x) |
 | pnpm | 10+ (built on 12.4.2) |
 | Browser | A recent Chrome, Edge, Safari or Firefox with WebGL2 |
-| Display | **Desktop only.** No layout below 1024px wide. Comfortable at 1366×850 and up; slide 23 is the densest and its code panes scroll below that |
+| Display | **Desktop only.** No layout below 1024px wide. Comfortable at 1366×850 and up; slide 23 is the densest — measured, its code panes fit whole at 1440×760 and start to scroll at about 1280×700 |
 
 Don't have pnpm? `npm install -g pnpm` (or `corepack enable`, though corepack does not yet
 understand pnpm 12's binary layout — the npm install is the reliable route).
@@ -103,6 +103,7 @@ src/
     motion.ts           shared easings, springs and variants
     transitions.ts      slide transition variants (push, dolly)
     rng.ts              seeded PRNG so 3D scenes lay out deterministically
+    three-console.ts    silences three.js's Clock deprecation notice, forwards the rest
     use-reduced-motion-safe.ts
   components/
     deck/               SlideShell, SlideDeck, NavigationBar, ProgressBar,
