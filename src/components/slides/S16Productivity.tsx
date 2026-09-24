@@ -7,6 +7,12 @@ import { SlideShell } from "@/components/deck/SlideShell";
 import { EASE_OUT, SPRING } from "@/lib/motion";
 import { useReducedMotionSafe } from "@/lib/use-reduced-motion-safe";
 
+// The source's hypothetical is 100 → 500 lines/day (note D1), shown here ten times larger.
+// The 5× ratio is the source's; at agent scale the original figures no longer read as the
+// impressive number the slide is about to take apart.
+const BEFORE = 1000;
+const AFTER = 5000;
+
 const FAILURES = [
   "Requirements were wrong",
   "Bugs increased",
@@ -19,15 +25,15 @@ const FAILURES = [
 export function S16Productivity() {
   const reduced = useReducedMotionSafe();
   const [landed, setLanded] = useState<string[]>(FAILURES);
-  const count = useMotionValue(100);
+  const count = useMotionValue(BEFORE);
   const rounded = useTransform(count, (v) => Math.round(v));
-  const [display, setDisplay] = useState(100);
+  const [display, setDisplay] = useState(BEFORE);
   const unsub = useRef<(() => void) | null>(null);
 
   useEffect(() => {
     const stop = rounded.on("change", (v) => setDisplay(v));
     unsub.current = stop;
-    const controls = animate(count, 500, {
+    const controls = animate(count, AFTER, {
       duration: reduced ? 0.2 : 1.2,
       ease: EASE_OUT,
       delay: 0.35,
@@ -39,7 +45,10 @@ export function S16Productivity() {
   }, [count, rounded, reduced]);
 
   // Each failure still stuck to the bar eats into what the raw number claims.
-  const net = Math.max(0, Math.round(100 + (400 * (FAILURES.length - landed.length)) / FAILURES.length));
+  const net = Math.max(
+    0,
+    Math.round(BEFORE + ((AFTER - BEFORE) * (FAILURES.length - landed.length)) / FAILURES.length),
+  );
 
   return (
     <SlideShell
@@ -57,7 +66,7 @@ export function S16Productivity() {
 
           <div className="flex items-end gap-4">
             <span className="font-mono text-[76px] leading-none font-semibold tracking-tight tabular-nums">
-              {display}
+              {display.toLocaleString("en-US")}
             </span>
             <span className="pb-3 font-mono text-[15px] text-muted">lines / day</span>
           </div>
@@ -67,12 +76,12 @@ export function S16Productivity() {
             <motion.div
               className="absolute inset-y-0 left-0 rounded-xl bg-warn/25"
               initial={{ width: "20%" }}
-              animate={{ width: `${(display / 500) * 100}%` }}
+              animate={{ width: `${(display / AFTER) * 100}%` }}
               transition={{ duration: 0 }}
             />
             <motion.div
               className="absolute inset-y-0 left-0 rounded-xl border-2 border-accent/60 bg-accent/12"
-              animate={{ width: `${(net / 500) * 100}%` }}
+              animate={{ width: `${(net / AFTER) * 100}%` }}
               transition={SPRING}
             />
             <div className="absolute inset-0 flex items-center justify-between px-5">
@@ -80,7 +89,7 @@ export function S16Productivity() {
                 Net productivity
               </span>
               <motion.span key={net} className="font-mono text-[18px] tabular-nums">
-                {net}
+                {net.toLocaleString("en-US")}
               </motion.span>
             </div>
           </div>

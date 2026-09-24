@@ -342,8 +342,10 @@ working with upper management, and the caveat — was supplied directly by the s
 sources are recorded in `docs/SOURCE-NOTES.md`. [`docs/SOURCE-NOTES.md`](docs/SOURCE-NOTES.md) is that document broken
 into numbered notes by theme; [`docs/PLAN.md`](docs/PLAN.md) cites those note IDs per slide.
 
-Nothing was invented. Where the source is explicitly hypothetical — the "100 → 500 lines per
-day" figure on slide 15 — the slide labels it as such. No company metrics, benchmarks or AI
+Nothing was invented. Where the source is explicitly hypothetical — the lines-per-day figure
+on slide 15 — the slide labels it as such. That figure is the one number deliberately changed:
+the source says 100 → 500 per day, the slide shows 1,000 → 5,000 — the same 5× ratio, scaled
+ten times, at the speaker's request and recorded as change 15 in `docs/PLAN.md`. No company metrics, benchmarks or AI
 vendors are named anywhere, because the source names none.
 
 If you add a slide, add its source note first.
