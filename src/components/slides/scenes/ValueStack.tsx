@@ -183,7 +183,7 @@ export function ValueStack({
             opacity={1}
           />
         </RoundedBox>
-        <Text position={[0, 0, 0.85]} fontSize={0.3} color={dark ? "#0a0a0b" : "#ffffff"} anchorX="center">
+        <Text position={[0, 0, 0.85]} fontSize={0.3} color={dark ? "#101014" : "#ffffff"} anchorX="center">
           Business Impact
         </Text>
       </group>

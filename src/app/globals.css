@@ -20,17 +20,17 @@
 }
 
 .dark {
-  --bg: #0a0a0b;
-  --surface: #141417;
-  --surface-2: #1c1c21;
-  --fg: #fafafa;
+  --bg: #101014;
+  --surface: #1a1b20;
+  --surface-2: #23242b;
+  --fg: #f0f0f2;
   --muted: #a1a1aa;
   --faint: #71717a;
   --accent: #818cf8;
   --accent-soft: #1e1b4b;
   --warn: #f59e0b;
   --warn-soft: #3a2a09;
-  --line: #27272a;
+  --line: #33343c;
   --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px -8px rgb(0 0 0 / 0.6);
   --glow: 0 0 0 1px rgb(129 140 248 / 0.2), 0 12px 48px -12px rgb(129 140 248 / 0.45);
   color-scheme: dark;

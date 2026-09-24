@@ -282,7 +282,7 @@ export function JudgmentChain({
 
   return (
     <group position={[-0.35, 0.15, 0]}>
-      <fog attach="fog" args={[dark ? "#0a0a0b" : "#fafaf9", 8, 20]} />
+      <fog attach="fog" args={[dark ? "#101014" : "#fafaf9", 8, 20]} />
 
       {positions.slice(0, -1).map((p, i) => (
         <Edge

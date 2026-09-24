@@ -14,13 +14,13 @@ export function usePalette() {
   return useMemo(
     () => ({
       dark,
-      bg: dark ? "#0a0a0b" : "#fafaf9",
-      fg: dark ? "#fafafa" : "#18181b",
+      bg: dark ? "#101014" : "#fafaf9",
+      fg: dark ? "#f0f0f2" : "#18181b",
       muted: dark ? "#a1a1aa" : "#71717a",
       accent: dark ? "#818cf8" : "#4f46e5",
       warn: dark ? "#f59e0b" : "#b45309",
-      surface: dark ? "#141417" : "#ffffff",
-      line: dark ? "#27272a" : "#e4e4e7",
+      surface: dark ? "#1a1b20" : "#ffffff",
+      line: dark ? "#33343c" : "#e4e4e7",
     }),
     [dark],
   );
