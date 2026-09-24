@@ -26,13 +26,14 @@ import { S20SeniorMeans } from "./S20SeniorMeans";
 import { S22SameTicket } from "./S22SameTicket";
 import { S23Recap } from "./S23Recap";
 import { S25QA } from "./S25QA";
+import { S28AiSetup } from "./S28AiSetup";
 
 export type SlideProps = { slideIndex: number };
 
 export type SlideDef = {
   id: string;
   title: string;
-  kind: "intro" | "speaker" | "overview" | "framing" | "content" | "recap" | "qa";
+  kind: "intro" | "speaker" | "overview" | "framing" | "content" | "recap" | "qa" | "bonus";
   Component: ComponentType<SlideProps>;
   has3d?: boolean;
   transition?: TransitionKind;
@@ -78,4 +79,7 @@ export const SLIDES: SlideDef[] = [
 
   { id: "recap", title: "The spine of the argument", kind: "recap", Component: S23Recap, has3d: true, transition: "dolly" },
   { id: "qa", title: "Over to you", kind: "qa", Component: S25QA, has3d: true, transition: "dolly" },
+
+  // Bonus, after Q&A and outside every chapter.
+  { id: "ai-setup", title: "How we use AI day to day", kind: "bonus", Component: S28AiSetup },
 ];

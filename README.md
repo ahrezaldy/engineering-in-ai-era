@@ -1,7 +1,7 @@
 # Engineering in the AI Era — A Management Perspective
 
 An interactive, web-based talk deck for **SWE Growth Chapter DIY**, 26 September 2026.
-Speaker: **Arif H. Rezaldy**. 45 minutes, 25 slides.
+Speaker: **Arif H. Rezaldy**. 45 minutes, 25 slides plus one bonus slide.
 
 The deck navigates like Google Slides or PowerPoint, runs in the browser, and every slide
 has real motion and something to interact with. Six slides carry a live 3D scene.
@@ -81,6 +81,8 @@ in sync as you navigate, so you can bookmark or share a position.
 - **Slide 24** plays the argument back automatically on arrival; *play argument* replays it.
 - **Slide 25** carries the discussion questions as clickable prompts, so you can run Q&A
   without leaving the slide.
+- **Slide 26** is a bonus, after Q&A: how the team uses AI day to day. Hover a workflow
+  skill to light the integrations it is built on. The plugin is deliberately unnamed.
 
 ---
 
@@ -338,7 +340,8 @@ Every claim on the talk's slides traces to
 `docs/Engineering_in_the_AI_Era_A_Management_Perspective_30-45min.md`, the speaker's own
 source document. The exceptions: the speaker intro (slide 2) and the closing slide's contact details come
 from <https://ahrezaldy.com/>, and the framing on slide 4 — the talk's goal, the years
-working with upper management, and the caveat — was supplied directly by the speaker. All
+working with upper management, and the caveat — was supplied directly by the speaker, as was
+the bonus slide's AI setup (slide 26). All
 sources are recorded in `docs/SOURCE-NOTES.md`. [`docs/SOURCE-NOTES.md`](docs/SOURCE-NOTES.md) is that document broken
 into numbered notes by theme; [`docs/PLAN.md`](docs/PLAN.md) cites those note IDs per slide.
 
